@@ -37,33 +37,35 @@ int* tx_secret_projects = (int*)0x9A6514;
 FACILITY* tx_facilities = (FACILITY *)0x9A4B68;
 FACTMETA* tx_factions_meta = (FACTMETA *)0x946FEC;
 FACTION* tx_factions = (FACTION *)0x96C9E0;
+TECH* tx_rules_tech = (TECH *)0x94F358;
 UNIT* tx_units = (UNIT *)0x9AB868;
 VEH* tx_vehicles = (VEH *)0x952828;
 BASE* tx_bases = (BASE *)0x97D040;
 MAP** tx_map_ptr = (MAP**)0x94A30C;
 
 
-typedef int __cdecl FP2INT(int, int);
-typedef int __cdecl FP3INT(int, int, int);
-typedef int __cdecl FP4INT(int, int, int, int);
+typedef int __cdecl fp_1int(int);
+typedef int __cdecl fp_2int(int, int);
+typedef int __cdecl fp_3int(int, int, int);
+typedef int __cdecl fp_4int(int, int, int, int);
+typedef int __cdecl fp_7intstr(int, int, int, int, int, int, int, const char*);
 
-int __cdecl (*tx_base_coast)(int) = (int (*)(int))0x50DF30;
+// params: faction, chassis, module, armor, specials, reactor, unit_plan, name
+fp_7intstr* tx_propose_proto = (fp_7intstr*)0x580860;
 
-// Spawn a new vehicle
 // params: prototype_id, faction, x, y
-FP4INT* tx_veh_init = (FP4INT *)0x5C03D0;
+fp_4int* tx_veh_init = (fp_4int*)0x5C03D0;
 
-FP4INT* tx_contiguous = (FP4INT *)0x53A780;
-
-FP3INT* tx_action_terraform = (FP3INT *)0x4C9B00;
-
-FP2INT* tx_bonus_at = (FP2INT *)0x592030;
-
-FP4INT* tx_base_prod_choices = (FP4INT *)0x4F81A0;
-
-FP3INT* tx_cost_factor = (FP3INT *)0x4E4430;
-
+fp_1int* tx_enemy_move = (fp_1int*)0x56B5B0;
+fp_2int* tx_action_build = (fp_2int*)0x4C96E0;
+fp_3int* tx_action_terraform = (fp_3int*)0x4C9B00;
+fp_2int* tx_bonus_at = (fp_2int*)0x592030;
+fp_2int* tx_can_convoy = (fp_2int*)0x564D90;
+fp_4int* tx_contiguous = (fp_4int*)0x53A780;
+fp_4int* tx_base_prod_choices = (fp_4int*)0x4F81A0;
+fp_3int* tx_cost_factor = (fp_3int*)0x4E4430;
 
 
-#endif
+
+#endif // __TERRANX_H__
 

@@ -389,16 +389,16 @@ struct FACTION
     char gap_86E[490];
     char unk_80[512];
     short unk_81[512];
-    int defensive_units_1;
+    int total_mil_units;
     int current_num_bases;
     int mil_strength_1;
     int mil_strength_2;
     int pop_total;
-    int unk_82;
+    int total_sea_units;
     int planet_busters;
     int probe_teams;
     int strategy_flags_1;
-    short defensive_units_2[128];
+    short unk_82[128];
     char unk_83[128];
     char unk_84[128];
     short unk_85[128];
@@ -470,5 +470,21 @@ struct MAP
     char pad[28];
 };
 #pragma pack(pop)
+
+struct TECH
+{
+  int flags;
+  char* pName;
+  int unk_0;
+  int unk_1;
+  int unk_2;
+  int AI_growth;
+  int AI_tech;
+  int AI_wealth;
+  int AI_power;
+  int preq_tech1;
+  int preq_tech2;
+};
+
 
 #endif // __TERRANX_TYPES_H__

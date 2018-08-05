@@ -588,4 +588,5 @@ enum former_action
     FORMER_MONOLITH = 19,
 };
 
+
 #endif // __TERRANX_ENUMS_H__
