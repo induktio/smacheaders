@@ -1,6 +1,7 @@
 #ifndef __TERRANX_TYPES_H__
 #define __TERRANX_TYPES_H__
 
+typedef unsigned char byte;
 
 #pragma pack(push, 1)
 struct BASE
@@ -75,28 +76,7 @@ struct BASE
     int pad11;
     int pad12;
 };
-#pragma pack(pop)
 
-#pragma pack(push, 1)
-struct FACILITY
-{
-    void *pName;
-    void *pEffect;
-    int pad;
-    int cost;
-    int maint;
-    int preq;
-    int free;
-    int AI_fight;
-    int AI_growth;
-    int AI_tech;
-    int AI_wealth;
-    int AI_power;
-};
-#pragma pack(pop)
-
-
-#pragma pack(push, 1)
 struct UNIT
 {
     char name[32];
@@ -116,10 +96,7 @@ struct UNIT
     short unk2_flags;
     short tech_preq_id;
 };
-#pragma pack(pop)
 
-
-#pragma pack(push, 1)
 struct VEH
 {
     short x_coord;
@@ -156,10 +133,24 @@ struct VEH
     short next_unit_id_stack;
     short prev_unit_id_stack;
 };
-#pragma pack(pop)
 
-#pragma pack(push, 1)
-struct FACTMETA
+struct MAP
+{
+    byte level;
+    byte altitude;
+    short flags;
+    byte visibility;
+    byte rocks;
+    byte unk_1;
+    char owner;
+    int built_items;
+    short landmarks;
+    char unk_2;
+    char art_ref_id;
+    char pad[28];
+};
+
+struct FactMeta
 {
     int is_leader_female;
     char filename[24];
@@ -212,10 +203,8 @@ struct FACTMETA
     int soc_priority_effect;
     int soc_opposition_effect;
 };
-#pragma pack(pop)
 
-#pragma pack(push, 1)
-struct FACTION
+struct Faction
 {
     int diplo_flags;
     int ranking;
@@ -451,40 +440,220 @@ struct FACTION
     int unk_117;
     int unk_118;
 };
-#pragma pack(pop)
 
-#pragma pack(push, 1)
-struct MAP
+struct R_Basic
 {
-    byte level;
-    byte altitude;
-    short flags;
-    byte visibility;
-    byte rocks;
-    byte unk_1;
-    char owner;
-    int built_items;
-    short landmarks;
-    char unk_2;
-    char art_ref_id;
-    char pad[28];
+    int mov_rate_along_roads;
+    int nutrient_intake_req_citizen;
+    int max_airdrop_rng_wo_orbital_insert;
+    int artillery_max_rng;
+    int artillery_dmg_numerator;
+    int artillery_dmg_denominator;
+    int nutrient_cost_multi;
+    int mineral_cost_multi;
+    int rules_tech_discovery_rate;
+    int limit_mineral_inc_for_mine_wo_road;
+    int nutrient_effect_mine_sq;
+    int min_base_size_specialists;
+    int drones_induced_genejack_factory;
+    int pop_limit_wo_hab_complex;
+    int pop_limit_wo_hab_dome;
+    int tech_preq_improv_fungus;
+    int tech_preq_ease_fungus_mov;
+    int tech_preq_build_road_fungus;
+    int tech_preq_allow_2_spec_abil;
+    int tech_preq_allow_3_nutrients_sq;
+    int tech_preq_allow_3_minerals_sq;
+    int tech_preq_allow_3_energy_sq;
+    int extra_cost_prototype_land;
+    int extra_cost_prototype_sea;
+    int extra_cost_prototype_air;
+    int psi_combat_land_numerator;
+    char gap_68[8];
+    int psi_combat_land_denominator;
+    char gap_74[8];
+    int starting_energy_reserve;
+    int combat_bonus_intrinsic_base_def;
+    int combat_bonus_atk_road;
+    int combat_bonus_atk_higher_elevation;
+    int combat_penalty_atk_lwr_elevation;
+    int tech_preq_orb_insert_wo_space;
+    int min_turns_between_councils;
+    int minerals_harvesting_forest;
+    int territory_max_dist_base;
+    int turns_corner_global_energy_market;
+    int tech_preq_mining_platform_bonus;
+    int tech_preq_economic_victory;
+    int combat_penalty_atk_airdrop;
+    int combat_bonus_fanatic;
+    int combat_land_vs_sea_artillery;
+    int combat_artillery_bonus_altitude;
+    int combat_mobile_open_ground;
+    int combat_mobile_def_in_rough;
+    int combat_bonus_trance_vs_psi;
+    int combat_bonus_empath_song_vs_psi;
+    int combat_infantry_vs_base;
+    int combat_penalty_air_supr_vs_ground;
+    int combat_bonus_air_supr_vs_air;
+    int combat_penalty_non_combat_vs_combat;
+    int combat_comm_jammer_vs_mobile;
+    int combat_bonus_vs_ship_port;
+    int combat_AAA_bonus_vs_air;
+    int combat_defend_sensor;
+    int combat_psi_bonus_per_PLANET;
+    int retool_strictness;
+    int retool_penalty_prod_change;
+    int retool_exemption;
+    int tgl_probe_steal_tech;
+    int tgl_humans_always_contact_tcp;
+    int tgl_humans_always_contact_pbem;
+    int max_dmg_percent_arty_base_bunker;
+    int max_dmg_percent_arty_open;
+    int max_dmg_percent_arty_sea;
+    int freq_global_warming_numerator;
+    int freq_global_warming_denominator;
+    int normal_start_year;
+    int normal_ending_year_lowest_3_diff;
+    int normal_ending_year_highest_3_diff;
+    int tgl_oblit_base_atrocity;
+    int base_size_subspace_gen;
+    int subspace_gen_req;
 };
-#pragma pack(pop)
 
-struct TECH
+struct R_Facility
 {
-  int flags;
-  char* pName;
-  int unk_0;
-  int unk_1;
-  int unk_2;
-  int AI_growth;
-  int AI_tech;
-  int AI_wealth;
-  int AI_power;
-  int preq_tech1;
-  int preq_tech2;
+    char* name;
+    char* effect;
+    int pad;
+    int cost;
+    int maint;
+    int preq;
+    int free;
+    int AI_fight;
+    int AI_growth;
+    int AI_tech;
+    int AI_wealth;
+    int AI_power;
 };
 
+struct R_Tech
+{
+    int flags;
+    char* name;
+    int unk_0;
+    int unk_1;
+    int unk_2;
+    int AI_growth;
+    int AI_tech;
+    int AI_wealth;
+    int AI_power;
+    int preq_tech1;
+    int preq_tech2;
+};
+
+struct R_Ability
+{
+    char* name;
+    char* description;
+    char* abbreviation;
+    int cost;
+    int padding;
+    int flags;
+    int preq_tech;
+};
+
+struct R_Chassis
+{
+    char* offsv1_name;
+    char* offsv2_name;
+    char* offsv_name_lrg;
+    char* defsv1_name;
+    char* defsv2_name;
+    char* defsv_name_lrg;
+    int offsv1_gender;
+    int offsv2_gender;
+    int offsv_gender_lrg;
+    int defsv1_gender;
+    int defsv2_gender;
+    int defsv_gender_lrg;
+    int offsv1_is_plural;
+    int offsv2_is_plural;
+    int offsv_is_plural_lrg;
+    int defsv1_is_plural;
+    int defsv2_is_plural;
+    int defsv_is_plural_lrg;
+    char speed;
+    char triad;
+    char range;
+    char cargo;
+    char cost;
+    char missile;
+    char sprite_flag_x_coord[8];
+    char sprite_flag_y_coord[8];
+    char sprite_unk1_x_coord[8];
+    char sprite_unk1_y_coord[8];
+    char sprite_unk2_x_coord[8];
+    char sprite_unk2_y_coord[8];
+    char sprite_unk3_x_coord[8];
+    char sprite_unk3_y_coord[8];
+    short preq_tech;
+};
+
+struct R_Citizen
+{
+    char* singular_name;
+    char* plural_name;
+    int preq_tech;
+    int obsol_tech;
+    int ops_bonus;
+    int psych_bonus;
+    int research_bonus;
+};
+
+struct R_Defense
+{
+    char* name;
+    char* name_short;
+    char defense_value;
+    char mode;
+    char cost;
+    char padding1;
+    short preq_tech;
+    short padding2;
+};
+
+struct R_Reactor
+{
+    char* name;
+    char* name_short;
+    short preq_tech;
+    short padding;
+};
+
+struct R_Terraform
+{
+    char* name;
+    char* name_sea;
+    int preq_tech;
+    int preq_tech_sea;
+    int flag;
+    int flag_sea;
+    int rate;
+    char* shortcuts;
+};
+
+struct R_Weapon
+{
+    char* name;
+    char* name_short;
+    char offense_value;
+    char icon;
+    char mode;
+    char cost;
+    short preq_tech;
+    short padding;
+};
+
+#pragma pack(pop)
 
 #endif // __TERRANX_TYPES_H__
